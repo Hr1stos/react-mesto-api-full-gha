@@ -19,7 +19,27 @@ mongoose.connect(DB_URL, {
   console.log('Подключен к БД');
 });
 
-app.use(cors());
+const allowList = [
+  'http://instagram-minimal.nomoredomainsicu.ru',
+  'https://instagram-minimal.nomoredomainsicu.ru',
+  'http://api.instagram-minimal.nomoredomainsrocks.ru',
+  'https://api.instagram-minimal.nomoredomainsrocks.ru',
+  'http://158.160.42.175',
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
+
+app.use(
+  cors({
+    origin: allowList,
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-type', 'Authorization', 'Accept'],
+    credentials: true,
+    exposedHeaders: ['set-cookie'],
+    optionsSuccessStatus: 204,
+  }),
+);
+
 // app.use(corsOptions);
 app.use(helmet());
 app.use(express.json());

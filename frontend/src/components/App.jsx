@@ -59,7 +59,6 @@ const App = () => {
 		authApi
 			.getContent(jwt)
 			.then((data) => {
-				console.log(data.data.email);
 				setUserData(data.data.email);
 				setLoggedIn(true);
 				navigate('/');

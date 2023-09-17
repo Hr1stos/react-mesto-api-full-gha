@@ -53,6 +53,7 @@ const App = () => {
 
 	const handleTokenCheck = () => {
 		const jwt = localStorage.getItem('jwt');
+		console.log(jwt)
 		if (!jwt) {
 			return;
 		}

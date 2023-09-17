@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const corsOptions = require('./middlewares/corsOptions');
+// const corsOptions = require('./middlewares/corsOptions');
+const cors = require('cors');
 const router = require('./routes/index');
 const handleError = require('./middlewares/handleError');
 
@@ -18,7 +19,8 @@ mongoose.connect(DB_URL, {
   console.log('Подключен к БД');
 });
 
-app.use(corsOptions);
+app.use(cors());
+// app.use(corsOptions);
 app.use(helmet());
 app.use(express.json());
 

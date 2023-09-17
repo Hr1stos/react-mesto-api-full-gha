@@ -37,7 +37,7 @@ const App = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		Promise.all([api.getDataUser(), api.getDataCards()])
+		loggedIn && Promise.all([api.getDataUser(), api.getDataCards()])
 			.then(([data, cards]) => {
 				setCurrentUser(data);
 				setCards(cards);
@@ -59,6 +59,7 @@ const App = () => {
 		authApi
 			.getContent(jwt)
 			.then((data) => {
+				console.log(data.data.email);
 				setUserData(data.data.email);
 				setLoggedIn(true);
 				navigate('/');

@@ -1,4 +1,5 @@
-const BASE_URL = process.env.REACT_APP_API_URL
+//const BASE_URL = process.env.REACT_APP_API_URL
+const BASE_URL = 'http://api.instagram-minimal.nomoredomainsrocks.ru'
 
 class Api {
 	constructor(options) {
@@ -69,28 +70,12 @@ class Api {
 			headers: this._headers,
 		})
 	}
-
-	//putLike(cardId) {
-	//	return this._request(`cards/${cardId}/likes`, {
-	//		method: "PUT",
-	//		credentials: "include",
-	//		headers: this._headers,
-	//	})
-	//}
-
-	//deleteLike(cardId) {
-	//	return this._request(`cards/${cardId}/likes`, {
-	//		method: "DELETE",
-	//		credentials: "include",
-	//		headers: this._headers,
-	//	})
-	//}
 }
 
 export const api = new Api({
 	url: BASE_URL,
+	credentials: "include",
 	headers: {
-		authorization: '44c177c0-bcd0-4b30-8fcb-5adcdab7ad45',
 		'Content-Type': 'application/json',
 	}
 })

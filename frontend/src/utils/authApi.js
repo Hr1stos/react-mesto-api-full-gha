@@ -1,5 +1,5 @@
-//export const BASE_URL = 'https://auth.nomoreparties.co'
-const BASE_URL = process.env.REACT_APP_API_URL
+//const BASE_URL = process.env.REACT_APP_API_URL
+const BASE_URL = 'http://api.instagram-minimal.nomoredomainsrocks.ru'
 
 const checkResponse = (res) => {
 	if (res.ok) {

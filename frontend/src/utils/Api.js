@@ -1,5 +1,4 @@
-//const BASE_URL = process.env.REACT_APP_API_URL
-const BASE_URL = 'http://api.instagram-minimal.nomoredomainsrocks.ru'
+const BASE_URL = process.env.REACT_APP_API_URL
 
 class Api {
 	constructor(options) {

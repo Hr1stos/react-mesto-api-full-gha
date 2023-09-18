@@ -8,8 +8,7 @@ const { UnauthorizedError } = require('../errors/unauthorizedError'); // 401
 const { NotFoundError } = require('../errors/notFoundError'); // 404
 const { ConflictError } = require('../errors/conflictError'); // 409
 
-// const { NODE_ENV, SECRET_KEY } = process.env;
-const JWT_SECRET = 'most-secret-key';
+const { NODE_ENV, SECRET_KEY } = process.env;
 
 const getUsers = (req, res, next) => {
   userModel.find({})
@@ -114,8 +113,8 @@ const login = (req, res, next) => {
             return;
           }
           const payload = { _id: user._id };
-          const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
-          res.cookie('token', token, { httpOnly: true, secure: true }).status(200).send({ message: 'Авторизация прошла успешно' });
+          const token = jwt.sign(payload, NODE_ENV === 'production' ? SECRET_KEY : 'most-secret-key', { expiresIn: '7d' });
+          res.cookie('token', token, { httpOnly: true }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
     })
     .catch((err) => {

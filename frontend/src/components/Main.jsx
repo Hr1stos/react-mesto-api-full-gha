@@ -15,7 +15,7 @@ export const Main =({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClic
 					onClick={onEditAvatar}
 				>
 					<img
-						src={currentUser.data?.avatar}
+						src={currentUser.avatar}
 						alt="Аватар"
 						className="profile__avatar"
 					/>
@@ -23,7 +23,7 @@ export const Main =({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClic
 				<div className="profile__info">
 					<div className="profile__container">
 						<h1 className="profile__name">
-							{currentUser.data?.name}
+							{currentUser.name}
 						</h1>
 						<button
 							aria-label="Редактироване"
@@ -34,7 +34,7 @@ export const Main =({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardClic
 						</button>
 					</div>
 					<p className="profile__opsane">
-						{currentUser.data?.about}
+						{currentUser.about}
 					</p>
 				</div>
 				<button

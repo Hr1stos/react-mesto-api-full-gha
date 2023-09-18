@@ -39,7 +39,7 @@ const App = () => {
 	useEffect(() => {
 		loggedIn && Promise.all([api.getDataUser(), api.getDataCards()])
 			.then(([data, cards]) => {
-				setCurrentUser(data);
+				setCurrentUser(data.data);
 				setCards(cards);
 			})
 			.catch((err) => {
@@ -52,16 +52,14 @@ const App = () => {
 	}, [])
 
 	const handleTokenCheck = () => {
-		const jwt = localStorage.getItem('jwt');
-		if (!jwt) {
-			return;
-		}
 		authApi
-			.getContent(jwt)
+			.getContent()
 			.then((data) => {
-				setUserData(data.data.email);
-				setLoggedIn(true);
-				navigate('/');
+				if (data) {
+					setUserData(data.data.email);
+					setLoggedIn(true);
+					navigate('/');
+				}
 			})
 			.catch((err) => {
 				console.error(`handleTokenCheck - ошибка: ${err}`)
@@ -89,8 +87,7 @@ const App = () => {
 	const onLogin = ({ email, password }) => {
 		authApi
 			.authorization({ email, password })
-			.then((data) => {
-				localStorage.setItem('jwt', data.token);
+			.then(() => {
 				setLoggedIn(true);
 				setUserData(email);
 				navigate('/');
@@ -103,7 +100,6 @@ const App = () => {
 	}
 
 	const onExit = () => {
-		localStorage.removeItem('jwt');
 		setLoggedIn(false);
 		navigate('/sign-in');
 		setUserData('');
@@ -130,7 +126,7 @@ const App = () => {
 	}
 
 	const handleCardLike = (card) => {
-		const isLiked = card.likes.some((i) => i === currentUser.data?._id);
+		const isLiked = card.likes.some((i) => i === currentUser._id);
 		api
 			.changeLikeCardStatus(card._id, isLiked)
 			.then((newCard) => {

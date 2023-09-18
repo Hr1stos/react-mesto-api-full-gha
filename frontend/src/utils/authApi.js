@@ -1,5 +1,4 @@
-//const BASE_URL = process.env.REACT_APP_API_URL
-const BASE_URL = 'http://api.instagram-minimal.nomoredomainsrocks.ru'
+const BASE_URL = process.env.REACT_APP_API_URL
 
 const checkResponse = (res) => {
 	if (res.ok) {
@@ -13,6 +12,7 @@ export const registration = ({ email, password }) => {
 		method: "POST",
 		credentials: 'include',
 		headers: {
+			"Accept": "application/json",
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify({ password, email }),
@@ -26,6 +26,7 @@ export const authorization = ({ email, password }) => {
 		method: "POST",
 		credentials: 'include',
 		headers: {
+			"Accept": "application/json",
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify({ password, email }),
@@ -38,6 +39,7 @@ export const getContent = () => {
 		method: "GET",
 		credentials: "include",
 		headers: {
+			"Accept": "application/json",
 			"Content-Type": "application/json"
 		},
 	})

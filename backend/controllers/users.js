@@ -115,7 +115,7 @@ const login = (req, res, next) => {
           }
           const payload = { _id: user._id };
           const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
-          res.cookie('token', token, { httpOnly: true }).status(200).send({ message: 'Авторизация прошла успешно' });
+          res.cookie('token', token, { httpOnly: true, secure: true }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
     })
     .catch((err) => {

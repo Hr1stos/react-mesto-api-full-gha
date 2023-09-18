@@ -114,7 +114,12 @@ const login = (req, res, next) => {
           }
           const payload = { _id: user._id };
           const token = jwt.sign(payload, NODE_ENV === 'production' ? SECRET_KEY : 'most-secret-key', { expiresIn: '7d' });
-          res.cookie('token', token, { httpOnly: true }).status(200).send({ message: 'Авторизация прошла успешно' });
+          res.cookie('token', token, {
+            sameSite: 'none',
+            secure: true,
+            httpOnly: true,
+            domain: 'nomoredomainsicu.ru',
+          }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
     })
     .catch((err) => {

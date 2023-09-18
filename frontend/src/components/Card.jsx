@@ -9,7 +9,6 @@ export const Card = ({ card, onCardLike, onCardDelete, onCardClick }) => {
 		`card__button_like ${isLiked && "card__button_like_active"}`
 	);
 
-	console.log(currentUser)
 	const handleLikeClick = () => {
 		onCardLike(card);
 	}

@@ -100,10 +100,18 @@ const App = () => {
 	}
 
 	const onExit = () => {
-		setLoggedIn(false);
-		navigate('/sign-in');
-		setUserData('');
-		setOpenMenu(false)
+		authApi
+			.signOut()
+			.then((res) => {
+				//window.localStorage.setItem('isLoggedIn', 'false');
+				setLoggedIn(false);
+				navigate('/sign-in');
+				setUserData('');
+				setOpenMenu(false)
+			})
+			.catch((err) => {
+				console.error(`onLogin - ошибка: ${err} `)
+			})
 	}
 
 	const handleCardClick = (card) => {

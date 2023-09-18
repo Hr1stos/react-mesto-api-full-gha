@@ -140,6 +140,10 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+const signOut = (req, res) => {
+  res.clearCookie('token').send({ message: 'Выход' });
+};
+
 module.exports = {
   getUsers,
   getUserById,
@@ -148,4 +152,5 @@ module.exports = {
   updateAvatarById,
   login,
   getCurrentUser,
+  signOut,
 };

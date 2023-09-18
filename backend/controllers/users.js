@@ -118,7 +118,6 @@ const login = (req, res, next) => {
             sameSite: 'none',
             secure: true,
             httpOnly: true,
-            domain: 'nomoredomainsicu.ru',
           }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
     })

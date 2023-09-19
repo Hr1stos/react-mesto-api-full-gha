@@ -115,10 +115,9 @@ const login = (req, res, next) => {
           const payload = { _id: user._id };
           const token = jwt.sign(payload, NODE_ENV === 'production' ? SECRET_KEY : 'most-secret-key', { expiresIn: '7d' });
           res.cookie('token', token, {
-            expiresIn: '7d',
-            sameSite: true,
+            expiresIn: '1d',
+            sameSite: 'none',
             secure: true,
-            httpOnly: true,
           }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
     })

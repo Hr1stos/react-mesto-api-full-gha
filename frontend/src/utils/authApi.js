@@ -36,7 +36,7 @@ export const authorization = ({ email, password }) => {
 
 export const signOut = () => {
 	return fetch(`${BASE_URL}/signout`, {
-		method: "GET",
+		method: "DELETE",
 		credentials: 'include',
 		headers: {
 			"Accept": "application/json",

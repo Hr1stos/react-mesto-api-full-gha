@@ -118,6 +118,7 @@ const login = (req, res, next) => {
             expiresIn: '1d',
             sameSite: 'none',
             secure: true,
+            httpOnly: true,
           }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
     })

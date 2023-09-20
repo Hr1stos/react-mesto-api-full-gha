@@ -10,8 +10,8 @@ export const EditProfilePopup = ({ isOpen, onClose, onUpdateUser, isLoad }) => {
 	useEffect(() => {
 		setIsFormValid(true);
 		setValues({
-			name: currentUser.data?.name,
-			about: currentUser.data?.about
+			name: currentUser.name,
+			about: currentUser.about
 		})
 	}, [currentUser, isOpen]);
 

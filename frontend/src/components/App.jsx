@@ -170,7 +170,8 @@ const App = () => {
 		api
 			.setDataUser({ name, about })
 			.then((userData) => {
-				setCurrentUser(userData);
+				console.log(userData)
+				setCurrentUser(userData.data);
 				closeAllPopups();
 				setIsLoading(false)
 			})

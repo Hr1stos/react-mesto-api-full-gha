@@ -9,6 +9,7 @@ export const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isLoad }) => {
 		resetForm()
 	}, [isOpen]);
 
+
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 

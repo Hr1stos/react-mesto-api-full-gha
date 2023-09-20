@@ -47,10 +47,9 @@ const App = () => {
 			});
 	}, [loggedIn])
 
-	//useEffect(() => {
-	//	handleTokenCheck();
-	//}, [])
-
+	useEffect(() => {
+		handleTokenCheck();
+	}, [loggedIn])
 
 	const handleTokenCheck = () => {
 		authApi
@@ -66,8 +65,6 @@ const App = () => {
 				console.error(`handleTokenCheck - ошибка: ${err}`)
 			});
 	};
-
-	useEffect(handleTokenCheck, [navigate]);
 
 	const onRegister = ({ email, password }) => {
 		authApi
@@ -187,7 +184,6 @@ const App = () => {
 		api
 			.setUserAvatar({ avatar })
 			.then((userAvatar) => {
-				console.log(userAvatar)
 				setCurrentUser(userAvatar.data);
 				closeAllPopups();
 				setIsLoading(false)

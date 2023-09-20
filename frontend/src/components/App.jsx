@@ -47,9 +47,10 @@ const App = () => {
 			});
 	}, [loggedIn])
 
-	useEffect(() => {
-		handleTokenCheck();
-	}, [])
+	//useEffect(() => {
+	//	handleTokenCheck();
+	//}, [])
+
 
 	const handleTokenCheck = () => {
 		authApi
@@ -65,6 +66,8 @@ const App = () => {
 				console.error(`handleTokenCheck - ошибка: ${err}`)
 			});
 	};
+
+	useEffect(handleTokenCheck, [navigate]);
 
 	const onRegister = ({ email, password }) => {
 		authApi
@@ -170,7 +173,6 @@ const App = () => {
 		api
 			.setDataUser({ name, about })
 			.then((userData) => {
-				console.log(userData)
 				setCurrentUser(userData.data);
 				closeAllPopups();
 				setIsLoading(false)
@@ -185,7 +187,8 @@ const App = () => {
 		api
 			.setUserAvatar({ avatar })
 			.then((userAvatar) => {
-				setCurrentUser(userAvatar);
+				console.log(userAvatar)
+				setCurrentUser(userAvatar.data);
 				closeAllPopups();
 				setIsLoading(false)
 			})

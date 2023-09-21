@@ -116,8 +116,8 @@ const login = (req, res, next) => {
           const token = jwt.sign(payload, NODE_ENV === 'production' ? SECRET_KEY : 'most-secret-key', { expiresIn: '7d' });
           res.cookie('token', token, {
             expiresIn: '1d',
-            sameSite: 'none',
-            secure: true,
+            // sameSite: 'none',
+            // secure: true,
             httpOnly: true,
           }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
@@ -142,8 +142,15 @@ const getCurrentUser = (req, res, next) => {
 };
 
 const signOut = (req, res) => {
-  res.clearCookie('token', { sameSite: 'none' }).send({ message: 'Выход' });
+  res.clearCookie('token').send({ message: 'Выход' });
 };
+
+// const signOut = (req, res) => {
+//  res.clearCookie('token', {
+//    sameSite: 'none',
+//    secure: true,
+//  }).send({ message: 'Выход' });
+// };
 
 module.exports = {
   getUsers,

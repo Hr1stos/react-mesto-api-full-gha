@@ -117,7 +117,7 @@ const login = (req, res, next) => {
           res.cookie('token', token, {
             expiresIn: '1d',
             // sameSite: 'none',
-            // secure: true,
+            secure: true,
             httpOnly: true,
           }).status(200).send({ message: 'Авторизация прошла успешно' });
         });
@@ -141,16 +141,15 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
-const signOut = (req, res) => {
-  res.clearCookie('token').send({ message: 'Выход' });
-};
-
 // const signOut = (req, res) => {
-//  res.clearCookie('token', {
-//    sameSite: 'none',
-//    secure: true,
-//  }).send({ message: 'Выход' });
+//  res.clearCookie('token').send({ message: 'Выход' });
 // };
+
+const signOut = (req, res) => {
+  res.clearCookie('token', {
+    secure: true,
+  }).send({ message: 'Выход' });
+};
 
 module.exports = {
   getUsers,

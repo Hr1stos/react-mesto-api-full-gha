@@ -1,8 +1,6 @@
 const CORS = [
   'http://instagram-minimal.nomoredomainsicu.ru',
   'https://instagram-minimal.nomoredomainsicu.ru',
-  'http://api.instagram-minimal.nomoredomainsicu.ru',
-  'https://api.instagram-minimal.nomoredomainsicu.ru',
   'http://api.instagram-minimal.nomoredomainsrocks.ru',
   'https://api.instagram-minimal.nomoredomainsrocks.ru',
   'http://158.160.42.175',

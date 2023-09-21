@@ -142,7 +142,7 @@ const getCurrentUser = (req, res, next) => {
 };
 
 const signOut = (req, res) => {
-  res.clearCookie('token').send({ message: 'Выход' });
+  res.clearCookie('token', { sameSite: 'none' }).send({ message: 'Выход' });
 };
 
 module.exports = {

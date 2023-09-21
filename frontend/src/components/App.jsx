@@ -16,8 +16,6 @@ import { Login } from "./Login";
 import { Register } from "./Register";
 import { InfoTooltip } from "./InfoTooltip";
 
-
-
 const App = () => {
 	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
 	const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -49,7 +47,7 @@ const App = () => {
 
 	useEffect(() => {
 		handleTokenCheck();
-	}, [loggedIn])
+	}, [])
 
 	const handleTokenCheck = () => {
 		authApi

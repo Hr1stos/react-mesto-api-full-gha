@@ -89,7 +89,8 @@ const App = () => {
 	const onLogin = ({ email, password }) => {
 		authApi
 			.authorization({ email, password })
-			.then(() => {
+			.then((data) => {
+				localStorage.setItem('jwt', data.token);
 				setLoggedIn(true);
 				setUserData(email);
 				navigate('/');

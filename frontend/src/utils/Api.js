@@ -18,18 +18,17 @@ class Api {
 	}
 
 	getDataCards() {
-		return this._request('/cards', { headers: this._headers, credentials: "include" })
+		return this._request('/cards', { headers: this._headers })
 	}
 
 	getDataUser() {
-		return this._request('/users/me', { headers: this._headers, credentials: "include" })
+		return this._request('/users/me', { headers: this._headers })
 	}
 
 	setDataUser(data) {
 		return this._request('/users/me', {
 			method: 'PATCH',
 			headers: this._headers,
-			credentials: "include",
 			body: JSON.stringify({
 				name: data.name,
 				about: data.about })
@@ -40,7 +39,6 @@ class Api {
 		return this._request('/users/me/avatar', {
 			method: 'PATCH',
 			headers: this._headers,
-			credentials: "include",
 			body: JSON.stringify(avatar)
 		})
 	}
@@ -49,7 +47,6 @@ class Api {
 		return this._request('/cards', {
 			method: 'POST',
 			headers: this._headers,
-			credentials: "include",
 			body: JSON.stringify(card)
 		})
 	}
@@ -57,7 +54,6 @@ class Api {
 	deleteCard(cardId) {
 		return this._request(`/cards/${cardId}`, {
 			method: 'DELETE',
-			credentials: "include",
 			headers: this._headers
 		})
 	}
@@ -65,7 +61,6 @@ class Api {
 	changeLikeCardStatus(cardId, isLiked) {
 		return this._request(`/cards/${cardId}/likes`, {
 			method: isLiked ? "DELETE" : "PUT",
-			credentials: "include",
 			headers: this._headers,
 		})
 	}
@@ -73,8 +68,8 @@ class Api {
 
 export const api = new Api({
 	url: BASE_URL,
-	credentials: "include",
 	headers: {
+		'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
 		'Content-Type': 'application/json',
 	}
 })

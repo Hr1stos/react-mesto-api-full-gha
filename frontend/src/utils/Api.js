@@ -3,7 +3,6 @@ const BASE_URL = process.env.REACT_APP_API_URL
 class Api {
 	constructor(options) {
 		this._url = options.url;
-		this._headers = options.headers;
 	}
 
 	_request(endpoint, options) {
@@ -18,11 +17,21 @@ class Api {
 	}
 
 	getDataCards() {
-		return this._request('/cards', { headers: this._headers })
+		return this._request('/cards', {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+				'Content-Type': 'application/json',
+			}
+		})
 	}
 
 	getDataUser() {
-		return this._request('/users/me', { headers: this._headers })
+		return this._request('/users/me', {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+				'Content-Type': 'application/json',
+			}
+		})
 	}
 
 	setDataUser(data) {
@@ -81,10 +90,4 @@ class Api {
 	}
 }
 
-export const api = new Api({
-	url: BASE_URL,
-	headers: {
-		'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-		'Content-Type': 'application/json',
-	}
-})
+export const api = new Api({ url: BASE_URL })

@@ -50,8 +50,12 @@ const App = () => {
 	}, [])
 
 	const handleTokenCheck = () => {
+		const jwt = localStorage.getItem('jwt');
+		if (!jwt) {
+			return;
+		}
 		authApi
-			.getContent()
+			.getContent(jwt)
 			.then((data) => {
 				if (data) {
 					setUserData(data.data.email);
@@ -98,18 +102,27 @@ const App = () => {
 	}
 
 	const onExit = () => {
-		authApi
-			.signOut()
-			.then((res) => {
-				setLoggedIn(false);
-				navigate('/sign-in');
-				setUserData('');
-				setOpenMenu(false)
-			})
-			.catch((err) => {
-				console.error(`onLogin - ошибка: ${err} `)
-			})
+		localStorage.removeItem('jwt');
+		setLoggedIn(false);
+		navigate('/sign-in');
+		setUserData('');
+		setOpenMenu(false)
 	}
+
+	//const onExit = () => {
+	//	authApi
+	//		.signOut()
+	//		.then((res) => {
+	//			localStorage.removeItem('jwt');
+	//			setLoggedIn(false);
+	//			navigate('/sign-in');
+	//			setUserData('');
+	//			setOpenMenu(false)
+	//		})
+	//		.catch((err) => {
+	//			console.error(`onLogin - ошибка: ${err} `)
+	//		})
+	//}
 
 	const handleCardClick = (card) => {
 		setSelectedCard(card);

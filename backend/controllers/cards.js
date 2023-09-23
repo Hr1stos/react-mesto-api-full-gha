@@ -41,10 +41,7 @@ const deleteCard = (req, res, next) => {
           res.status(200).send(card);
         })
         .catch((err) => {
-          if (err instanceof mongoose.Error.CastError) {
-            next(new BadRequestError('Ошибка в id карты'));
-            return;
-          } if (err instanceof mongoose.Error.DocumentNotFoundError) {
+          if (err instanceof mongoose.Error.DocumentNotFoundError) {
             next(new NotFoundError('Карточки нет в базе'));
             return;
           }
@@ -52,7 +49,10 @@ const deleteCard = (req, res, next) => {
         });
     })
     .catch((err) => {
-      if (err instanceof mongoose.Error.DocumentNotFoundError) {
+      if (err instanceof mongoose.Error.CastError) {
+        next(new BadRequestError('Ошибка в id карты'));
+        return;
+      } if (err instanceof mongoose.Error.DocumentNotFoundError) {
         next(new NotFoundError('Карточки нет в базе'));
         return;
       }

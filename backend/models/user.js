@@ -35,11 +35,12 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    select: false,
     required: [true, 'Поле "password" должно быть заполнено'],
   },
 }, { versionKey: false });
 
-userSchema.statics.findUserByCredentials = function (email, password, next) {
+userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email })
     .select('+password')
     .then((user) => {
@@ -57,8 +58,7 @@ userSchema.statics.findUserByCredentials = function (email, password, next) {
           }
           return user;
         });
-    })
-    .catch(next);
+    });
 };
 
 module.exports = mongoose.model('user', userSchema);

@@ -98,10 +98,6 @@ const updateAvatarById = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    next(new BadRequestError('Email или пароль не могут быть пустыми'));
-    return;
-  }
   userModel.findUserByCredentials(email, password)
     .then((user) => {
       const payload = { _id: user._id };
@@ -110,7 +106,7 @@ const login = (req, res, next) => {
       });
       res.status(200).send({ token });
     })
-    .catch(next);
+    .catch((err) => next(err));
 };
 
 const getCurrentUser = (req, res, next) => {
@@ -123,17 +119,6 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
-// const signOut = (req, res) => {
-//  res.clearCookie('token').send({ message: 'Выход' });
-// };
-
-const signOut = (req, res) => {
-  res.clearCookie('token', {
-    // sameSite: 'none',
-    secure: true,
-  }).send({ message: 'Выход' });
-};
-
 module.exports = {
   getUsers,
   getUserById,
@@ -142,5 +127,4 @@ module.exports = {
   updateAvatarById,
   login,
   getCurrentUser,
-  signOut,
 };
